@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Student Management System</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Student Management System</h1>
+
+    <a href="/add" class="add-btn">
+        Add Student
+    </a>
+
+    <br><br>
+
+    <!-- Search -->
+    <input
+        type="text"
+        id="search"
+        class="search"
+        placeholder="Search student..."
+        onkeyup="searchStudent()"
+    >
+
+    <br><br>
+
+    <!-- Student table -->
+
+    <table id="studentTable">
+
+        <tr>
+
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Course</th>
+            <th>Phone</th>
+            <th>Actions</th>
+
+        </tr>
+
+        {% for student in students %}
+
+        <tr>
+
+            <td>{{ student.id }}</td>
+
+            <td>{{ student.name }}</td>
+
+            <td>{{ student.email }}</td>
+
+            <td>{{ student.course }}</td>
+
+            <td>{{ student.phone }}</td>
+
+            <td>
+
+                <a
+                    href="/edit/{{ student.id }}"
+                    class="edit-btn">
+                    Edit
+                </a>
+
+                <a
+                    href="/delete/{{ student.id }}"
+                    class="delete-btn"
+                    onclick="return confirmDelete()">
+                    Delete
+                </a>
+
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+</div>
+
+
+<script src="{{ url_for('static', filename='script.js') }}">
+</script>
+
+</body>
+
+</html>
